@@ -2,22 +2,24 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0us3acdt2jog"
-path="res://.godot/imported/3768899871 (1).png-2b54af0f332b51d86eaed8b0ff217c8f.ctex"
+uid="uid://c84mnv4855tif"
+path="res://.godot/imported/Spaceship.png-bace165901b5f149870c7df290b215c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://3768899871 (1).png"
-dest_files=["res://.godot/imported/3768899871 (1).png-2b54af0f332b51d86eaed8b0ff217c8f.ctex"]
+source_file="res://assets/spaceship/Spaceship.png"
+dest_files=["res://.godot/imported/Spaceship.png-bace165901b5f149870c7df290b215c7.ctex"]
 
 [params]
 
 compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
@@ -25,6 +27,10 @@ mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
+process/channel_remap/red=0
+process/channel_remap/green=1
+process/channel_remap/blue=2
+process/channel_remap/alpha=3
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

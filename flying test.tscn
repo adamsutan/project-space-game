@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://d4gnp6oxmof4r" path="res://node_2d.gd" id="1_2rouq"]
 [ext_resource type="Script" uid="uid://brbn61eds2y68" path="res://ship.gd" id="2_musmr"]
-[ext_resource type="Texture2D" uid="uid://c84mnv4855tif" path="res://Spaceship.png" id="3_2rouq"]
-[ext_resource type="Texture2D" uid="uid://b0us3acdt2jog" path="res://3768899871 (1).png" id="5_olrgg"]
+[ext_resource type="Texture2D" uid="uid://c84mnv4855tif" path="res://assets/spaceship/Spaceship.png" id="3_2rouq"]
+[ext_resource type="Texture2D" uid="uid://b0us3acdt2jog" path="res://assets/planet/3768899871.png" id="5_olrgg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_olrgg"]
 atlas = ExtResource("3_2rouq")
