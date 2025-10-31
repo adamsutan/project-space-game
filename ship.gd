@@ -15,7 +15,7 @@ var _boosting := false
 
 func _physics_process(delta: float) -> void:
 	var accel := Vector2.ZERO
-	var turning := 0.0
+	#var turning := 0.0
 
 	## --- Rotasi (Q/E) ---
 	#if Input.is_action_pressed("turn_left"):
@@ -24,7 +24,9 @@ func _physics_process(delta: float) -> void:
 		#turning += 1.0
 	#rotation += turning * rotation_speed * delta
 	
-	
+	#var target_angle := (get_global_mouse_position() - global_position).angle()
+	#rotation = lerp_angle(rotation, target_angle, 10.0 * delta)
+
 
 	_boosting = Input.is_action_pressed("boost")
 
