@@ -10,22 +10,19 @@ extends CharacterBody2D
 @export var boost_damp_scale: float = 0.7   # drag sedikit berkurang saat boost
 @export var brake_accel: float = 1200.0     # pengereman aktif
 
+
 var _thrusting := false
 var _boosting := false
+var bullet_path=preload("res://bullet.tscn")
+
 
 func _physics_process(delta: float) -> void:
 	var accel := Vector2.ZERO
-	#var turning := 0.0
+	look_at(get_global_mouse_position())
+	if Input.is_action_just_pressed("shoot"):
+		fire()
 
-	## --- Rotasi (Q/E) ---
-	#if Input.is_action_pressed("turn_left"):
-		#turning -= 1.0
-	#if Input.is_action_pressed("turn_right"):
-		#turning += 1.0
-	#rotation += turning * rotation_speed * delta
-	
-	#var target_angle := (get_global_mouse_position() - global_position).angle()
-	#rotation = lerp_angle(rotation, target_angle, 10.0 * delta)
+
 
 
 	_boosting = Input.is_action_pressed("boost")
@@ -34,20 +31,22 @@ func _physics_process(delta: float) -> void:
 	var forward := Vector2.UP.rotated(rotation)     # "hidung" kapal
 	var right := Vector2.RIGHT.rotated(rotation)    # kanan kapal
 
-	# --- Thrust maju/mundur ---
-	_thrusting = false
-	if Input.is_action_pressed("thrust_forward"):
-		accel += forward * thrust_accel
-		_thrusting = true
-	elif Input.is_action_pressed("thrust_reverse"):
-		accel -= forward * reverse_accel
-		_thrusting = true
+	## --- Thrust maju/mundur ---
+	#_thrusting = false
+	#if Input.is_action_pressed("thrust_forward"):
+		#accel += forward * thrust_accel
+		#_thrusting = true
+	#elif Input.is_action_pressed("thrust_reverse"):
+		#accel -= forward * reverse_accel
+		#_thrusting = true
+
+#maju mundur pakai strafe. kiri kanan pakai thrust
 
 	# --- Strafe kiri/kanan (A/D) ---
-	if Input.is_action_pressed("strafe_left"):
+	if Input.is_action_pressed("thrust_reverse"):
 		accel -= right * strafe_accel
 		_thrusting = true
-	if Input.is_action_pressed("strafe_right"):
+	if Input.is_action_pressed("thrust_forward"):
 		accel += right * strafe_accel
 		_thrusting = true
 
@@ -75,3 +74,10 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity.normalized() * current_max_speed
 
 	move_and_slide()
+
+func fire():
+	var bullet=bullet_path.instantiate()
+	bullet.dir=rotation
+	bullet.pos=$Node2D.global_position
+	bullet.rota=global_rotation
+	get_parent().add_child(bullet)
