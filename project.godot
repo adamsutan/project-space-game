@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="project space travel"
-run/main_scene="uid://bevqeemaas5oi"
+run/main_scene="uid://cqhu50u4oup51"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
