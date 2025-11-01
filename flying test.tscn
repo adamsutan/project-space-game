@@ -1,39 +1,10 @@
-[gd_scene load_steps=63 format=3 uid="uid://bevqeemaas5oi"]
+[gd_scene load_steps=62 format=3 uid="uid://bevqeemaas5oi"]
 
 [ext_resource type="Script" uid="uid://d4gnp6oxmof4r" path="res://node_2d.gd" id="1_2rouq"]
 [ext_resource type="Script" uid="uid://brbn61eds2y68" path="res://ship.gd" id="2_musmr"]
-[ext_resource type="Texture2D" uid="uid://c84mnv4855tif" path="res://assets/spaceship/Spaceship.png" id="3_2rouq"]
+[ext_resource type="Texture2D" uid="uid://c1bjgetqa20gu" path="res://assets/spaceship/spaceship_new_vertical.png" id="3_olrgg"]
 [ext_resource type="Script" uid="uid://c8hwhv2bea7hg" path="res://ship_sprite_rotation.gd" id="4_olrgg"]
 [ext_resource type="Texture2D" uid="uid://b0us3acdt2jog" path="res://assets/planet/3768899871.png" id="5_olrgg"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_olrgg"]
-atlas = ExtResource("3_2rouq")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iyywy"]
-atlas = ExtResource("3_2rouq")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pe0x1"]
-atlas = ExtResource("3_2rouq")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_bmdv0"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_olrgg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iyywy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pe0x1")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_musmr"]
 atlas = ExtResource("5_olrgg")
@@ -393,6 +364,28 @@ animations = [{
 "speed": 9.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyywy"]
+atlas = ExtResource("3_olrgg")
+region = Rect2(0, 0, 128, 108)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe0x1"]
+atlas = ExtResource("3_olrgg")
+region = Rect2(0, 108, 128, 108)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bmdv0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyywy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe0x1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
 [sub_resource type="Gradient" id="Gradient_pe0x1"]
 offsets = PackedFloat32Array(0, 0.975904, 0.981928, 0.993976, 1)
 colors = PackedColorArray(0, 0, 0, 1, 0.228916, 0.228916, 0.228916, 1, 0.174699, 0.174699, 0.174699, 1, 0.295181, 0.295181, 0.295181, 1, 1, 1, 1, 1)
@@ -403,6 +396,13 @@ gradient = SubResource("Gradient_pe0x1")
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_2rouq")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(582.625, 601)
+scale = Vector2(1.7725, 1.70375)
+sprite_frames = SubResource("SpriteFrames_iyywy")
+autoplay = "default"
+frame_progress = 0.51418
+
 [node name="Ship" type="CharacterBody2D" parent="."]
 script = ExtResource("2_musmr")
 
@@ -410,15 +410,8 @@ script = ExtResource("2_musmr")
 position = Vector2(71, 322)
 sprite_frames = SubResource("SpriteFrames_bmdv0")
 autoplay = "default"
-frame_progress = 0.731516
+frame_progress = 0.6353088
 script = ExtResource("4_olrgg")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(582.625, 601)
-scale = Vector2(1.7725, 1.70375)
-sprite_frames = SubResource("SpriteFrames_iyywy")
-autoplay = "default"
-frame_progress = 0.51418
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -4096
