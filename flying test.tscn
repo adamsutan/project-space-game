@@ -1,8 +1,9 @@
-[gd_scene load_steps=62 format=3 uid="uid://bevqeemaas5oi"]
+[gd_scene load_steps=63 format=3 uid="uid://bevqeemaas5oi"]
 
 [ext_resource type="Script" uid="uid://d4gnp6oxmof4r" path="res://node_2d.gd" id="1_2rouq"]
 [ext_resource type="Script" uid="uid://brbn61eds2y68" path="res://ship.gd" id="2_musmr"]
 [ext_resource type="Texture2D" uid="uid://c1bjgetqa20gu" path="res://assets/spaceship/spaceship_new_vertical.png" id="3_olrgg"]
+[ext_resource type="PackedScene" uid="uid://dfrqg1tispa1f" path="res://pause_menu.tscn" id="5_musmr"]
 [ext_resource type="Texture2D" uid="uid://b0us3acdt2jog" path="res://assets/planet/3768899871.png" id="5_olrgg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_musmr"]
@@ -396,7 +397,7 @@ colors = PackedColorArray(0, 0, 0, 1, 0.228916, 0.228916, 0.228916, 1, 0.174699,
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_bmdv0"]
 gradient = SubResource("Gradient_pe0x1")
 
-[node name="Node2D" type="Node2D"]
+[node name="Gameplay" type="Node2D"]
 script = ExtResource("1_2rouq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -407,26 +408,32 @@ autoplay = "default"
 frame_progress = 0.51418
 
 [node name="Ship" type="CharacterBody2D" parent="."]
-position = Vector2(-3, -1)
+position = Vector2(25, 324)
 script = ExtResource("2_musmr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ship"]
-position = Vector2(2.0000076, 3.0000305)
+position = Vector2(-4, 1)
 scale = Vector2(0.9140625, 1.0092592)
 sprite_frames = SubResource("SpriteFrames_bmdv0")
 autoplay = "default"
 frame_progress = 0.6353088
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
-position = Vector2(8, -1)
+position = Vector2(3, 0)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_olrgg")
 
 [node name="Node2D" type="Node2D" parent="Ship"]
-position = Vector2(56, 3)
+position = Vector2(69, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = -4096
-position = Vector2(538, 402)
+position = Vector2(566, 401)
 scale = Vector2(5.988282, 983.0001)
 texture = SubResource("GradientTexture1D_bmdv0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Pause menu" parent="CanvasLayer" instance=ExtResource("5_musmr")]
+
+[connection signal="visibility_changed" from="CanvasLayer" to="." method="_on_canvas_layer_visibility_changed"]
