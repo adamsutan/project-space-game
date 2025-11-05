@@ -21,34 +21,33 @@ func _physics_process(delta: float) -> void:
 	look_at(get_global_mouse_position())
 	if Input.is_action_just_pressed("shoot"):
 		fire()
-
-
-
-
+		
 	_boosting = Input.is_action_pressed("boost")
 
 	# --- Arah lokal kapal ---
-	var forward := Vector2.UP.rotated(rotation)     # "hidung" kapal
-	var right := Vector2.RIGHT.rotated(rotation)    # kanan kapal
+	var right := Vector2.UP.rotated(rotation)    # kanan kapal
+	var forward := Vector2.RIGHT.rotated(rotation)  # "hidung" kapal
 
-	## --- Thrust maju/mundur ---
-	#_thrusting = false
-	#if Input.is_action_pressed("thrust_forward"):
-		#accel += forward * thrust_accel
-		#_thrusting = true
-	#elif Input.is_action_pressed("thrust_reverse"):
-		#accel -= forward * reverse_accel
-		#_thrusting = true
+	# --- Thrust dan Strafe menggunakan match-case ---
+	_thrusting = false
 
-#maju mundur pakai strafe. kiri kanan pakai thrust
+	# --- Directional Controls
+	for action in ["thrust_forward", "thrust_reverse", "strafe_left", "strafe_right"]:
+		if Input.is_action_pressed(action):
+			match action:
+				"thrust_forward":
+					accel += forward * thrust_accel
+					_thrusting = true
+				"thrust_reverse":
+					accel -= forward * reverse_accel
+					_thrusting = true
+				"strafe_left":
+					accel -= right * strafe_accel
+					_thrusting = true
+				"strafe_right":
+					accel += right * strafe_accel
+					_thrusting = true
 
-	# --- Strafe kiri/kanan (A/D) ---
-	if Input.is_action_pressed("thrust_reverse"):
-		accel -= right * strafe_accel
-		_thrusting = true
-	if Input.is_action_pressed("thrust_forward"):
-		accel += right * strafe_accel
-		_thrusting = true
 
 	# --- Boost memengaruhi accel & top speed ---
 	var boost_mul := boost_multiplier if _boosting else 1.0
