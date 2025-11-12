@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://cf4n2rmdco1hb"]
+
+[ext_resource type="Script" uid="uid://brbn61eds2y68" path="res://ship.gd" id="1_4cq66"]
+[ext_resource type="Texture2D" uid="uid://bxb3k23e4kvr6" path="res://assets/spaceship/spaceship_new.png" id="2_v4325"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyywy"]
+atlas = ExtResource("2_v4325")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe0x1"]
+atlas = ExtResource("2_v4325")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bmdv0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyywy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe0x1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_olrgg"]
+radius = 31.0
+height = 96.0
+
+[node name="Ship" type="CharacterBody2D"]
+script = ExtResource("1_4cq66")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4, 1)
+rotation = 1.5707964
+scale = Vector2(0.9140625, 1.0092592)
+sprite_frames = SubResource("SpriteFrames_bmdv0")
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_olrgg")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(69, 1)
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -25,8 +25,8 @@ func _physics_process(delta: float) -> void:
 	_boosting = Input.is_action_pressed("boost")
 
 	# --- Arah lokal kapal ---
-	var right := Vector2.UP.rotated(rotation)    # kanan kapal
-	var forward := Vector2.RIGHT.rotated(rotation)  # "hidung" kapal
+	var forward := transform.x  # kolom X = arah depan
+	var right := transform.y    # kolom Y = arah kanan
 
 	# --- Thrust dan Strafe menggunakan match-case ---
 	_thrusting = false

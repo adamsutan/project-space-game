@@ -1,10 +1,16 @@
-[gd_scene load_steps=63 format=3 uid="uid://bevqeemaas5oi"]
+[gd_scene load_steps=58 format=3 uid="uid://bevqeemaas5oi"]
 
 [ext_resource type="Script" uid="uid://d4gnp6oxmof4r" path="res://node_2d.gd" id="1_2rouq"]
-[ext_resource type="Script" uid="uid://brbn61eds2y68" path="res://ship.gd" id="2_musmr"]
-[ext_resource type="Texture2D" uid="uid://bxb3k23e4kvr6" path="res://assets/spaceship/spaceship_new.png" id="4_olrgg"]
+[ext_resource type="PackedScene" uid="uid://cf4n2rmdco1hb" path="res://ship.tscn" id="3_2rouq"]
 [ext_resource type="PackedScene" uid="uid://dfrqg1tispa1f" path="res://pause_menu.tscn" id="5_musmr"]
 [ext_resource type="Texture2D" uid="uid://b0us3acdt2jog" path="res://assets/planet/3768899871.png" id="5_olrgg"]
+
+[sub_resource type="Gradient" id="Gradient_pe0x1"]
+offsets = PackedFloat32Array(0, 0.73333335)
+colors = PackedColorArray(0, 0, 0, 1, 0.228916, 0.228916, 0.228916, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_bmdv0"]
+gradient = SubResource("Gradient_pe0x1")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_musmr"]
 atlas = ExtResource("5_olrgg")
@@ -364,41 +370,14 @@ animations = [{
 "speed": 9.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_iyywy"]
-atlas = ExtResource("4_olrgg")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pe0x1"]
-atlas = ExtResource("4_olrgg")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_bmdv0"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iyywy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pe0x1")
-}],
-"loop": true,
-"name": &"default",
-"speed": 8.0
-}]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_olrgg"]
-radius = 31.0
-height = 96.0
-
-[sub_resource type="Gradient" id="Gradient_pe0x1"]
-offsets = PackedFloat32Array(0, 0.975904, 0.981928, 0.993976, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.228916, 0.228916, 0.228916, 1, 0.174699, 0.174699, 0.174699, 1, 0.295181, 0.295181, 0.295181, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_bmdv0"]
-gradient = SubResource("Gradient_pe0x1")
-
 [node name="Gameplay" type="Node2D"]
 script = ExtResource("1_2rouq")
+
+[node name="Background" type="Sprite2D" parent="."]
+z_index = -4096
+position = Vector2(427, 584)
+scale = Vector2(11.594727, 2109.75)
+texture = SubResource("GradientTexture1D_bmdv0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(582.625, 601)
@@ -407,39 +386,15 @@ sprite_frames = SubResource("SpriteFrames_iyywy")
 autoplay = "default"
 frame_progress = 0.51418
 
-[node name="Ship" type="CharacterBody2D" parent="."]
+[node name="Ship" parent="." instance=ExtResource("3_2rouq")]
 position = Vector2(500, 400)
-script = ExtResource("2_musmr")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Ship"]
-position = Vector2(-4, 1)
-rotation = 1.5707964
-scale = Vector2(0.9140625, 1.0092592)
-sprite_frames = SubResource("SpriteFrames_bmdv0")
-autoplay = "default"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ship"]
-position = Vector2(3, 0)
-rotation = 1.5707964
-shape = SubResource("CapsuleShape2D_olrgg")
-
-[node name="Node2D" type="Node2D" parent="Ship"]
-position = Vector2(69, 1)
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Ship"]
-remote_path = NodePath("../../Camera2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = -4096
-position = Vector2(597, 389)
-scale = Vector2(5.988282, 983.0001)
-texture = SubResource("GradientTexture1D_bmdv0")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("5_musmr")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2(500, 400)
 
 [connection signal="visibility_changed" from="CanvasLayer" to="." method="_on_canvas_layer_visibility_changed"]
