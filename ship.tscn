@@ -19,10 +19,27 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pe0x1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyywy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe0x1")
+}],
+"loop": true,
+"name": &"boosting",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyywy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe0x1")
 }],
 "loop": true,
 "name": &"default",
-"speed": 8.0
+"speed": 6.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_olrgg"]
@@ -30,6 +47,8 @@ radius = 31.0
 height = 96.0
 
 [node name="Ship" type="CharacterBody2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_4cq66")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -37,6 +56,7 @@ position = Vector2(-4, 1)
 rotation = 1.5707964
 scale = Vector2(0.9140625, 1.0092592)
 sprite_frames = SubResource("SpriteFrames_bmdv0")
+animation = &"boosting"
 autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

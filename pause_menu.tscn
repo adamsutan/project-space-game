@@ -204,11 +204,11 @@ text = "Continue"
 layout_mode = 2
 text = "Setting"
 
-[node name="main menu" type="Button" parent="Panel/VBoxContainer"]
+[node name="MainMenu" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Back to main menu"
 
-[node name="quit" type="Button" parent="Panel/VBoxContainer"]
+[node name="Quit" type="Button" parent="Panel/VBoxContainer"]
 layout_mode = 2
 text = "Quit"
 
@@ -220,5 +220,5 @@ autoplay = "RESET"
 
 [connection signal="pressed" from="Panel/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="Panel/VBoxContainer/Setting" to="." method="_on_setting_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/main menu" to="." method="_on_main_menu_pressed"]
-[connection signal="pressed" from="Panel/VBoxContainer/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/MainMenu" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="Panel/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

@@ -22,7 +22,12 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot"):
 		fire()
 		
+	# Booster
 	_boosting = Input.is_action_pressed("boost")
+	if _boosting:
+		$AnimatedSprite2D.play("boosting")
+	else:
+		$AnimatedSprite2D.play("default")
 
 	# --- Arah lokal kapal ---
 	var forward := transform.x  # kolom X = arah depan
