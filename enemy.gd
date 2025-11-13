@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var health_info: Label = $HealthInfo
 
 var speed = 40
+var explosion_scene = preload("res://explosion.tscn")
 var player = null
 var player_chase = false
 var _health = 100
@@ -35,3 +36,4 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 		
 		if _health <= 0:
 			queue_free()
+		
