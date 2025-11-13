@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8t7l5snftsnf"]
+[gd_scene load_steps=5 format=3 uid="uid://c8t7l5snftsnf"]
 
 [ext_resource type="Texture2D" uid="uid://c8jq2n3iyma4t" path="res://assets/projectile/bullet.png" id="1_v7oki"]
 [ext_resource type="Script" uid="uid://djrt37ifnedbm" path="res://bullet.gd" id="1_v8qja"]
@@ -7,17 +7,37 @@
 radius = 3.0
 height = 10.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_t4vbm"]
+radius = 14.0
+
 [node name="Bullet" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 3
 script = ExtResource("1_v8qja")
 
 [node name="Picbull" type="Sprite2D" parent="."]
-position = Vector2(24, 1)
+position = Vector2(27, 1)
 scale = Vector2(0.5, 0.469)
 texture = ExtResource("1_v7oki")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(35, 0)
+position = Vector2(38, 0)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_v8qja")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="HurtboxArea" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(21, 0)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_t4vbm")
+debug_color = Color(0.95081097, 0.016501242, 0.56111354, 0.41960785)
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

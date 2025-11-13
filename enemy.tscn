@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bbfnmf31levmw"]
+[gd_scene load_steps=17 format=3 uid="uid://bbfnmf31levmw"]
 
 [ext_resource type="Script" uid="uid://dfifrff2v0l6f" path="res://enemy.gd" id="1_4gyqm"]
 [ext_resource type="Texture2D" uid="uid://cct0lathc8red" path="res://assets/characters/slime.png" id="1_7k104"]
@@ -86,19 +86,29 @@ animations = [{
 "speed": 9.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ar8e5"]
-radius = 64.00781
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_7k104"]
 radius = 8.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ar8e5"]
+radius = 64.00781
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gyqm"]
+radius = 12.0415945
+
 [node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_4gyqm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_n0g06")
 animation = &"move"
 autoplay = "idle"
+
+[node name="EnemyColl" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_7k104")
+debug_color = Color(0.6081274, 0.5226763, 0.38711995, 0.41960785)
 
 [node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 2
@@ -108,10 +118,25 @@ collision_mask = 2
 position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_ar8e5")
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="HitboxArea" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 2)
-shape = SubResource("CircleShape2D_7k104")
-debug_color = Color(0.94937056, 0.12416709, 0.47822082, 0.41960785)
+shape = SubResource("CircleShape2D_4gyqm")
+debug_color = Color(0.93512666, 0.14163408, 0.53298056, 0.41960785)
+
+[node name="HealthInfo" type="Label" parent="."]
+offset_left = -27.0
+offset_top = -31.0
+offset_right = 27.0
+offset_bottom = -8.0
+theme_override_font_sizes/font_size = 10
+text = "Musuh"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
